@@ -21,4 +21,8 @@
             - if signed_in?
               %li= link_to 'Profile', user_path(current_user)
     .container
+      - [:success, :error].each do |t|
+        - if flash[t].present?
+          = content_tag :div, flash[t], class: "flash #{t.to_s}"
+    .container
       = yield

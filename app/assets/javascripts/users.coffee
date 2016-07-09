@@ -1,3 +1,8 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+ready = ->
+  if $('#users_show').length > 0
+    $('.add-skill').click ->
+      skill = prompt("What skill would you like added to your profile? ")
+      $(this).attr("href", $(this).attr("href").replace("PLACEHOLDER", encodeURIComponent(skill)))
+      true
+
+$(document).on('turbolinks:load', ready)

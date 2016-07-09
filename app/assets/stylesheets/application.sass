@@ -1,4 +1,5 @@
 @import "neat"
+@import "font-awesome"
 
 @import "common"
 
@@ -64,3 +65,18 @@ header
           color: white
           margin: 0
           text-decoration: none
+
+.flash
+  @include span-columns(8 of 12)
+  @include shift(2 of 12)
+
+  color: white
+  font-weight: 300
+  padding: 1em 2em
+  margin-top: 1em
+
+  &.success
+    background-color: $color-success
+
+  &.error
+    background-color: $color-error

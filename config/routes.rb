@@ -7,5 +7,10 @@ Rails.application.routes.draw do
   get 'auth/failure', to: redirect('/')
   post 'sign_out', to: 'sessions#destroy', as: :sign_out
 
-  resources :users, only: [:show]
+  resources :users, only: [:show] do
+    member do
+      post 'remove_skill'
+      post 'add_skill'
+    end
+  end
 end

@@ -1,3 +1,5 @@
+- own = (current_user == @user)
+
 .container
   = image_tag @user.avatar_url, class: 'avatar'
 
@@ -8,9 +10,14 @@
     %span Oops. This user hasn't put in any skill yet.
   - else
     - @user.skill_list.each do |s|
-      %span.skill= s
+      %span.skill
+        = s
+        - if own
+          = link_to remove_skill_user_path(@user, skill: s), method: :post, data: {confirm: "Do you really want to remove the skill \"#{s}\" from your profile? "} do
+            %i.fa.fa-trash-o
 
-
+- if own
+  = link_to 'Add a Skill', add_skill_user_path(@user, skill: 'PLACEHOLDER'), class: 'add-skill', method: :post
 
 .container
   .scoreboard
