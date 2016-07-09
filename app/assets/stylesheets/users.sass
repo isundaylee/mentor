@@ -1,0 +1,35 @@
+@import "common"
+
+#users_show
+  .avatar
+    @include span-columns(6 of 24)
+    @include shift(9 of 24)
+
+    margin-top: 3em
+    // border-top-left-radius: 30px
+    // border-top-right-radius: 30px
+    border-radius: 20px
+
+  .scoreboard
+    @include span-columns(6 of 12)
+    @include shift(3 of 12)
+
+    padding: 1em 0
+    background-color: $color-1
+    z-index: -100
+
+    margin-top: 2em
+
+    .score, .desc
+      color: white
+      float: left
+      text-align: center
+
+    .score
+      font-size: 3em
+      width: 25%
+
+    .desc
+      width: 25%
+      margin-top: 0.9em
+      font-size: 1.2em

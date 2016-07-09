@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20160708073411) do
     t.string   "uid"
     t.string   "name"
     t.string   "oauth_token"
+    t.string   "avatar_url"
     t.datetime "oauth_token_expires_at"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false

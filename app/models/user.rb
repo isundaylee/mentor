@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
       u.provider = auth.provider
       u.uid = auth.uid
       u.name = auth.info.name
+      u.avatar_url = auth.info.image
       u.oauth_token = auth.credentials.token
       u.oauth_token_expires_at = Time.at(auth.credentials.expires_at)
 
