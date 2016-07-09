@@ -1,27 +1,33 @@
 - own = (current_user == @user)
 
 .container
-  = image_tag @user.avatar_url, class: 'avatar'
+  .left
+    .container
+      = image_tag @user.avatar_url, class: 'avatar'
+      .info
+        %h2= @user.name
 
-%h2= @user.name
+        %p.skills
+          - if @user.skill_list.empty?
+            %span This user hasn't put in any skill yet.
+          - else
+            - @user.skill_list.each do |s|
+              %span.skill
+                = s
+                - if own
+                  = link_to remove_skill_user_path(@user, skill: s), method: :post, data: {confirm: "Do you really want to remove the skill \"#{s}\" from your profile? "} do
+                    %i.fa.fa-trash-o
 
-%p.skills
-  - if @user.skill_list.empty?
-    %span Oops. This user hasn't put in any skill yet.
-  - else
-    - @user.skill_list.each do |s|
-      %span.skill
-        = s
         - if own
-          = link_to remove_skill_user_path(@user, skill: s), method: :post, data: {confirm: "Do you really want to remove the skill \"#{s}\" from your profile? "} do
-            %i.fa.fa-trash-o
+          = link_to 'Add a Skill', add_skill_user_path(@user, skill: 'PLACEHOLDER'), class: 'add-skill', method: :post
 
-- if own
-  = link_to 'Add a Skill', add_skill_user_path(@user, skill: 'PLACEHOLDER'), class: 'add-skill', method: :post
+        .scoreboard
+          %p.stat
+            Taught for
+            %span.score= 30
+            hours
+          %p.stat
+            Held
+            %span.score= 5
+            events
 
-.container
-  .scoreboard
-    %span.score 30
-    %span.desc Hours Taught
-    %span.desc Events Held
-    %span.score 5
