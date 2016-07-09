@@ -1,7 +1,20 @@
-= image_tag @user.avatar_url, class: 'avatar'
+.container
+  = image_tag @user.avatar_url, class: 'avatar'
 
-.scoreboard
-  %span.score 30
-  %span.desc Hours Taught
-  %span.desc Events Held
-  %span.score 5
+%h2= @user.name
+
+%p.skills
+  - if @user.skill_list.empty?
+    %span Oops. This user hasn't put in any skill yet.
+  - else
+    - @user.skill_list.each do |s|
+      %span.skill= s
+
+
+
+.container
+  .scoreboard
+    %span.score 30
+    %span.desc Hours Taught
+    %span.desc Events Held
+    %span.score 5
