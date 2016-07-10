@@ -6,6 +6,14 @@ ready = ->
         $(this).attr("href", $(this).attr("href").replace("PLACEHOLDER", encodeURIComponent(skill)))
       return !!skill
 
+    $('.set-rate').click ->
+      rate = prompt("What rate (tokens per hour) do you wanna charge for private tutoring? ", "1.0")
+      if !!rate
+        $(this).attr("href", $(this).attr("href").replace("PLACEHOLDER", encodeURIComponent(rate)))
+      return !!rate
+
+    # Calendar thingy
+
     selection_start = null
     own = $('.calendar').data('own')
 
@@ -71,6 +79,11 @@ ready = ->
       else
         if st_status == 'available'
           action = "reserved"
+
+      if action == "reserved"
+        price = 0.5 * (ed - st + 1) * parseFloat($(".calendar").data("rate"))
+        sure = confirm("Do you really wanna reserve this slot for #{price.toFixed(2)} tokens?")
+        return unless sure
 
       $('#mark_calendar_form input[name=date]').val(date)
       $('#mark_calendar_form input[name=st]').val(st)

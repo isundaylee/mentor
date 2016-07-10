@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160710001407) do
+ActiveRecord::Schema.define(version: 20160710191542) do
 
   create_table "segments", force: :cascade do |t|
     t.integer  "user_id"
@@ -50,10 +50,10 @@ ActiveRecord::Schema.define(version: 20160710001407) do
     t.string   "oauth_token"
     t.string   "avatar_url"
     t.datetime "oauth_token_expires_at"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
     t.decimal  "rate"
-    t.decimal  "balance"
+    t.decimal  "balance",                default: 0.0
   end
 
 end

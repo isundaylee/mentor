@@ -1,4 +1,5 @@
 - own = (current_user == @user)
+- tutor = @user.rate.present?
 
 .container
   .left
@@ -19,7 +20,8 @@
                     %i.fa.fa-trash-o
 
         - if own
-          = link_to 'Add a Skill', add_skill_user_path(@user, skill: 'PLACEHOLDER'), class: 'add-skill', method: :post
+          = link_to 'Add a Skill', add_skill_user_path(@user, skill: 'PLACEHOLDER'), class: 'action add-skill', method: :post
+          = link_to 'Set Private Tutoring Rate', set_rate_user_path(@user, rate: 'PLACEHOLDER'), class: 'action set-rate', method: :post
 
         .scoreboard
           %p.stat
@@ -30,6 +32,19 @@
             Held
             %span.score= 5
             events
+          - if tutor
+            %p.stat
+              Private tutoring
+              %span.score= "%0.1f" % @user.rate
+              tokens per hour
 
     .container
-      = render 'calendar', user: @user, own: own
+      %h3 Private Tutoring Availability
+      - if tutor
+        = render 'calendar', user: @user, own: own
+      - else
+        - if own
+          %p.instruction Set a private tutor rate above to enable private tutoring.
+        - else
+          %p.instruction This tutor does not provide private tutoring yet.
+

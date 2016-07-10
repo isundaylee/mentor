@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     member do
       post 'remove_skill'
       post 'add_skill'
+      post 'set_rate'
 
       get 'calendar'
       post 'mark_calendar'
