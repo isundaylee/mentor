@@ -31,3 +31,26 @@
             %span.score= 5
             events
 
+    .container
+      %h3 Private Tutoring Availability
+
+      %table.calendar
+        %tr
+          %th
+          %th Mon
+          %th Tue
+          %th Wed
+          %th Thu
+          %th Fri
+          %th Sat
+          %th Sun
+        - 0.upto(23) do |i|
+          %tr
+            %th= "#{(i - 1) % 12 + 1} #{i >= 12 ? "PM" : "AM"}"
+            - 7.times do
+              %td
+          %tr
+            %th
+            - 7.times do
+              %td &nbsp;
+
