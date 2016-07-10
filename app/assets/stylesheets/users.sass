@@ -1,6 +1,11 @@
 @import "common"
 
 #users_show
+  h3
+    font-weight: 600
+    font-size: 2em
+    margin-bottom: 0.5em
+
   .left
     @include span-columns (6 of 12)
 
@@ -65,13 +70,16 @@
           color: $color-1
           border-radius: 2px
 
+  .tutoring
+    font-size: 1.2em
+    margin: 0.5em 0
+
+    .key
+      color: $color-1
+      font-weight: 600
 
   .right
     @include span-columns (6 of 12)
-
-    h3
-      font-weight: 600
-      font-size: 2em
 
     .instruction
       font-size: 1.2em

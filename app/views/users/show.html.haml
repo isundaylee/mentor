@@ -47,6 +47,24 @@
               %span.score= "%0.1f" % @user.balance
               tokens left
 
+    - if own
+      .container
+        %h3 Scheduled Private Tutoring
+        - @tutorings.each do |t|
+          - type, seg = t
+
+          - verb = type.to_s.capitalize
+          - prep = (type == :giving ? 'to' : 'from')
+          - other = (type == :giving ? seg.owner : seg.user)
+
+          %p.tutoring
+            = verb
+            tutoring
+            = prep
+            %span.key= other.name
+            on
+            %span.key= seg.date.strftime("%Y/%m/%d") + " (#{slot_start_to_text(seg.st)} - #{slot_end_to_text(seg.ed)})"
+
   .right
     .container
       %h3 Private Tutoring Availability

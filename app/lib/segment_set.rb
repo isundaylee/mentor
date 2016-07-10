@@ -39,6 +39,8 @@ class SegmentSet
     st = @set.min
     ed = @set.max
 
+    return [] if st.nil? # empty
+
     results = []
     curr_st = st
 
