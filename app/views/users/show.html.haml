@@ -24,7 +24,7 @@
 
         - if own
           = link_to 'Add a Skill', add_skill_user_path(@user, skill: 'PLACEHOLDER'), class: 'action add-skill', method: :post
-          = link_to 'Set Private Tutoring Rate', set_rate_user_path(@user, rate: 'PLACEHOLDER'), class: 'action set-rate', method: :post
+          = link_to "#{tutor ? 'Change' : 'Set'} Private Tutoring Rate", set_rate_user_path(@user, rate: 'PLACEHOLDER'), class: 'action set-rate', method: :post
 
         .scoreboard
           %p.stat
