@@ -71,6 +71,9 @@
       font-weight: 600
       font-size: 2em
 
+    .instruction
+      font-size: 1.2em
+
     .calendar
       width: 100%
       border: 1px solid $color-1
@@ -85,3 +88,12 @@
         text-align: center
         border: 0.5px solid $color-1
         width: 12%
+
+        &:hover, &.selected
+          background-color: $color-1a
+
+        &.blocked
+          background-color: $color-1
+
+          &:hover, &.selected
+            background-color: $color-1A

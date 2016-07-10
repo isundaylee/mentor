@@ -1,0 +1,24 @@
+- today = Date.today
+
+- st = today.at_beginning_of_week
+- ed = today.at_end_of_week
+
+%table.calendar{'data-own' => own.to_s}
+  %tr
+    %th
+    - (st..ed).each do |d|
+      %th= d.strftime("%m/%d")
+  - 0.upto(47) do |i|
+    - hour = i / 2
+    - on_hour = (i % 2 == 0)
+    - text = on_hour ? "#{(hour - 1) % 12 + 1} #{hour >= 12 ? "PM" : "AM"}" : ""
+    %tr
+      %th=  text
+      - (st..ed).each do |d|
+        %td.blocked{'data-date' => d.to_s, 'data-slot' => i, 'data-selectable' => true, 'data-status' => 'unavailable'} &nbsp;
+
+= form_tag mark_calendar_user_path(user), id: 'mark_calendar_form' do |f|
+  = hidden_field_tag :date
+  = hidden_field_tag :st
+  = hidden_field_tag :ed
+  = hidden_field_tag :action
