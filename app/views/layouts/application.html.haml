@@ -13,7 +13,7 @@
         %nav
           %ul
             - if signed_in?
-              %li= "Welcome, #{current_user.name}"
+              %li= "Welcome, #{current_user.name} (%0.1f tokens left)" % current_user.balance
               %li= link_to 'Sign Out', sign_out_path, method: :post
             - else
               %li= link_to 'Sign In', "/auth/google_oauth2"

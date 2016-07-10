@@ -41,6 +41,12 @@
               %span.score= "%0.1f" % @user.rate
               tokens per hour
 
+          - if own
+            %p.stat
+              I have
+              %span.score= "%0.1f" % @user.balance
+              tokens left
+
   .right
     .container
       %h3 Private Tutoring Availability
