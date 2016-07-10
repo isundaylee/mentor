@@ -10,7 +10,10 @@
 
         %p.skills
           - if @user.skill_list.empty?
-            %span This user hasn't put in any skill yet.
+            - if own
+              %span You haven't put in any skill yet.
+            - else
+              %span This user hasn't put in any skill yet.
           - else
             - @user.skill_list.each do |s|
               %span.skill
