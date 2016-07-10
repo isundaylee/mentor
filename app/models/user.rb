@@ -16,5 +16,9 @@ class User < ActiveRecord::Base
     end
   end
 
+  def total_tutor_hours
+    0.5 * self.segments.where('owner_id != ?', self.id).map { |s| (s.ed - s.st + 1) }.sum
+  end
+
   private
 end
