@@ -43,6 +43,8 @@ class UsersController < ApplicationController
     ed = params[:ed].to_i
     action = params[:mark_as]
 
+    st, ed = ed, st if st > ed
+
     case action
     when 'reserved'
       return redirect_to @user, flash: {error: "You shouldn't reserve your own time slots. "} if @user.id == current_user.id
