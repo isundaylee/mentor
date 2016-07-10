@@ -31,6 +31,10 @@ class SegmentSet
     return true
   end
 
+  def include?(i)
+    @set.include?(i)
+  end
+
   def canonical_form
     st = @set.min
     ed = @set.max

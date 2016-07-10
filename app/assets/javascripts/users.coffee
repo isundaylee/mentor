@@ -16,7 +16,13 @@ ready = ->
       st_status = $(st).data("status")
       slot_status = $(slot).data("status")
 
-      return st_status == slot_status
+      if own
+        if st_status == "unavailable"
+          return true
+        else if st_status == "available"
+          return slot_status != "reserved"
+      else
+        return slot_status == "available"
 
     acceptable = (st) ->
       st_status = $(st).data("status")
@@ -69,7 +75,7 @@ ready = ->
       $('#mark_calendar_form input[name=date]').val(date)
       $('#mark_calendar_form input[name=st]').val(st)
       $('#mark_calendar_form input[name=ed]').val(ed)
-      $('#mark_calendar_form input[name=action]').val(action)
+      $('#mark_calendar_form input[name=mark_as]').val(action)
 
       $('#mark_calendar_form').submit()
 

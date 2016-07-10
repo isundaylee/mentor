@@ -32,9 +32,4 @@
             events
 
     .container
-      %h3 Private Tutoring Availability
-
-      - if own
-        %p.instruction Click to select time segments when you will be able to offer private tutoring. Slots with white background are your current available time slots. Slots with green background are already reserved by students.
-
       = render 'calendar', user: @user, own: own

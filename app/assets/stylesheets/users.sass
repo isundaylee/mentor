@@ -89,11 +89,21 @@
         border: 0.5px solid $color-1
         width: 12%
 
-        &:hover, &.selected
-          background-color: $color-1a
+        &.available
+          background-color: white
 
-        &.blocked
+          &:hover, &.selected
+            background-color: $color-1A
+
+        &.unavailable
           background-color: $color-1
 
           &:hover, &.selected
             background-color: $color-1A
+
+        &.reserved
+          background-color: $color-success
+
+          &:hover, &.selected
+            background-color: $color-1A
+

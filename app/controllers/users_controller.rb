@@ -27,18 +27,32 @@ class UsersController < ApplicationController
   end
 
   def mark_calendar
+    return redirect_to root_path, flash: {error: "You need to be signed in. "} unless signed_in?
+
     date = Date.parse(params[:date])
     st = params[:st].to_i
     ed = params[:ed].to_i
-    action = params[:action]
-
-    intersections = @user.segments.where('(start_time <= ? AND ? <= end_time) OR (start_time <= ? AND ? <= end_time)', slot_center(date, st), slot_center(date, st), slot_center(date, ed), slot_center(date, ed))
+    action = params[:mark_as]
 
     case action
     when 'reserved'
+      return redirect_to @user, flash: {error: "You shouldn't reserve your own time slots. "} if @user.id == current_user.id
+      return redirect_to @user, flash: {error: "Cannot reserve slots. "} unless Segment.insert(@user, current_user, date, st, ed)
+
+      return redirect_to @user, flash: {success: "You have successfully reserved the slots! "}
     when 'available'
+      return redirect_to @user, flash: {error: "You can only mark your own time slots available. "} unless @user.id == current_user.id
+      return redirect_to @user, flash: {error: "Cannot mark slots as available. "} unless Segment.insert(@user, current_user, date, st, ed)
+
+      return redirect_to @user, flash: {success: "You have successfully marked the slots as available! "}
     when 'unavailable'
+      return redirect_to @user, flash: {error: "You can only mark your own time slots unavailable. "} unless @user.id == current_user.id
+      return redirect_to @user, flash: {error: "Cannot mark slots as unavailable. "} unless Segment.remove(@user, current_user, date, st, ed)
+
+      return redirect_to @user, flash: {success: "You have successfully marked the slots as unavailable! "}
     end
+
+    raise "Unexpected action: #{action}. "
   end
 
   private

@@ -53,4 +53,28 @@ class Segment < ActiveRecord::Base
 
     return true
   end
+
+  def self.get_slots(user, date)
+    inter_own = Segment.where(user_id: user.id, date: date).where(owner_id: user.id)
+    inter_non_own = Segment.where(user_id: user.id, date: date).where('owner_id != ?', user.id)
+    set_own = SegmentSet.new
+    set_non_own = SegmentSet.new
+
+    inter_own.each { |i| set_own.insert(i.st, i.ed) }
+    inter_non_own.each { |i| set_non_own.insert(i.st, i.ed) }
+
+    results = []
+
+    0.upto(47) do |i|
+      if set_non_own.include?(i)
+        results << :reserved
+      elsif set_own.include?(i)
+        results << :available
+      else
+        results << :unavailable
+      end
+    end
+
+    results
+  end
 end

@@ -3,6 +3,14 @@
 - st = today.at_beginning_of_week
 - ed = today.at_end_of_week
 
+- slots = {}
+- (st..ed).each { |d| slots[d] = Segment.get_slots(user, d) }
+
+%h3 Private Tutoring Availability
+
+- if own
+  %p.instruction Select slots to toggle your availability. Slots with white background are your current available time slots. Slots with green background are already reserved by students.
+
 %table.calendar{'data-own' => own.to_s}
   %tr
     %th
@@ -15,10 +23,10 @@
     %tr
       %th=  text
       - (st..ed).each do |d|
-        %td.blocked{'data-date' => d.to_s, 'data-slot' => i, 'data-selectable' => true, 'data-status' => 'unavailable'} &nbsp;
+        %td{'class' => slots[d][i].to_s, 'data-date' => d.to_s, 'data-slot' => i, 'data-status' => slots[d][i].to_s} &nbsp;
 
 = form_tag mark_calendar_user_path(user), id: 'mark_calendar_form' do |f|
   = hidden_field_tag :date
   = hidden_field_tag :st
   = hidden_field_tag :ed
-  = hidden_field_tag :action
+  = hidden_field_tag :mark_as
