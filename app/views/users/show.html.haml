@@ -42,7 +42,7 @@
     .container
       %h3 Private Tutoring Availability
       - if tutor
-        = render 'calendar', user: @user, own: own
+        = render 'calendar', user: @user, own: own, week_offset: @week_offset
       - else
         - if own
           %p.instruction Set a private tutor rate above to enable private tutoring.

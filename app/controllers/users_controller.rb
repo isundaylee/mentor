@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :fetch_user
 
   def show
+    @week_offset = params[:week_offset].to_i
   end
 
   def remove_skill
