@@ -1,4 +1,6 @@
 class Event < ActiveRecord::Base
+  default_scope -> { order('start_time DESC')}
+
   belongs_to :user
   has_many :participations
 

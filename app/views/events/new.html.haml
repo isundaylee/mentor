@@ -13,5 +13,6 @@
   = f.select :start_minute, minute_select_options('Starts at ')
   = f.select :end_minute, minute_select_options('Ends at ')
   = f.text_field :rate, placeholder: 'Price of the event in tokens. '
+  = f.text_field :skill_list, placeholder: 'Comma seperated list of skill tags. '
 
   = f.submit "Create Event"
