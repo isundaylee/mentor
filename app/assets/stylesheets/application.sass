@@ -10,7 +10,49 @@
 
 // Utilities
 
+// Form
+
+.errors
+  @include span-columns(6 of 12)
+  @include shift(3 of 12)
+
+  background-color: $color-error
+  color: white
+  padding: 1em 1.5em
+  margin-bottom: 2em
+
+  p
+    margin: 0
+    font-size: 1.2em
+
+.centre-form
+  @include span-columns(8 of 12)
+  @include shift(2)
+
+  input, textarea, select
+    width: 100%
+    font-size: 1.2em
+    font-weight: 300
+    border: 2px solid $color-1
+    padding: 0.4em 0.6em
+    border-radius: 5px
+    margin-bottom: 0.6em
+    margin-top: 0
+
+  [type=submit]
+    background-color: $color-1
+    color: white
+    margin-top: 2em
+
+  textarea
+    height: 8em
+
 // Layout
+
+h1
+  text-align: center
+  font-size: 3em
+  font-weight: 600
 
 body
   margin: 0

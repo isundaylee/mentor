@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'events/new'
+
+  get 'events/create'
+
   get 'users/show'
 
   root 'pages#homepage'
@@ -17,4 +21,6 @@ Rails.application.routes.draw do
       post 'mark_calendar'
     end
   end
+
+  resources :events, only: [:new, :create]
 end

@@ -6,6 +6,9 @@
     font-size: 2em
     margin-bottom: 0.5em
 
+  .instruction
+    font-size: 1.2em
+
   .left
     @include span-columns (6 of 12)
 
@@ -78,11 +81,29 @@
       color: $color-1
       font-weight: 600
 
+  .events
+    .title
+      font-size: 1.4em
+      font-weight: 600
+      margin-top: 1em
+      margin-bottom: 0
+      // color: $color-1
+
+    .details
+      margin-bottom: 0.5em
+      margin-top: 0
+
+      a
+        text-decoration: none
+        color: $color-1
+
+    .description
+      margin-top: 0
+      font-size: 1.2em
+      margin: 0
+
   .right
     @include span-columns (6 of 12)
-
-    .instruction
-      font-size: 1.2em
 
     .prev, .next
       text-decoration: none

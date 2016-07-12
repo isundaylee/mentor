@@ -33,7 +33,7 @@
             hours
           %p.stat
             Held
-            %span.score= 5
+            %span.score= @user.events.count
             events
           - if tutor
             %p.stat
@@ -63,7 +63,32 @@
             = prep
             %span.key= other.name
             on
-            %span.key= seg.date.strftime("%Y/%m/%d") + " (#{slot_start_to_text(seg.st)} - #{slot_end_to_text(seg.ed)})"
+            %span.key= date_str(seg.date) + " (#{slot_start_to_text(seg.st)} - #{slot_end_to_text(seg.ed)})"
+
+      .container.events
+        %h3 Events Hosted
+        = link_to 'Host New Event', new_event_path, class: 'action'
+
+        - if @user.events.empty?
+          %p.instruction= "#{own ? "You haven't" : "This user hasn't"} hosted any event yet."
+        - else
+          - @user.events.each do |e|
+            %p.title= e.title
+            %p.details
+              - if e.same_day?
+                = "#{date_str(e.start_time)} #{time_str(e.start_time)} - #{time_str(e.end_time)}"
+              - else
+                = "#{date_str(e.start_time)} #{time_str(e.start_time)} - #{date_str(e.end_time)} #{time_str(e.end_time)}"
+              at
+              - if e.location_is_url?
+                = link_to e.location, e.location
+              - else
+                = e.location
+              charging
+              = e.rate
+              tokens
+            %p.description= e.description
+
 
   .right
     .container
@@ -72,7 +97,7 @@
         = render 'calendar', user: @user, own: own, week_offset: @week_offset
       - else
         - if own
-          %p.instruction Set a private tutor rate above to enable private tutoring.
+          %p.instruction Set a private tutor rate on the left to enable private tutoring.
         - else
           %p.instruction This tutor does not provide private tutoring yet.
 

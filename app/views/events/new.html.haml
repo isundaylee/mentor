@@ -1,0 +1,17 @@
+%h1 Host New Event
+
+- if @event.errors.any?
+  %div.errors
+    - @event.errors.full_messages.each do |m|
+      %p= m
+
+= form_for @event, html: {class: 'centre-form'} do |f|
+  = f.text_field :title, placeholder: 'Title of the event. '
+  = f.text_area :description, placeholder: 'Detailed description of the event. '
+  = f.text_field :location, placeholder: 'Location of the event (physical location or webcast URL). '
+  = f.text_field :date, placeholder: 'Date of the event (e.g. 2016/09/13). '
+  = f.select :start_minute, minute_select_options('Starts at ')
+  = f.select :end_minute, minute_select_options('Ends at ')
+  = f.text_field :rate, placeholder: 'Price of the event in tokens. '
+
+  = f.submit "Create Event"
