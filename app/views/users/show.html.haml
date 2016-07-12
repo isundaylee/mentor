@@ -65,32 +65,33 @@
             on
             %span.key= date_str(seg.date) + " (#{slot_start_to_text(seg.st)} - #{slot_end_to_text(seg.ed)})"
 
-      .container.events
-        %h3 Events Hosted
+    .container.events
+      %h3 Events Hosted
+      - if own
         = link_to 'Host New Event', new_event_path, class: 'action'
 
-        - if @user.events.empty?
-          %p.instruction= "#{own ? "You haven't" : "This user hasn't"} hosted any event yet."
-        - else
-          - @user.events.each do |e|
-            .event
-              - if own && !@user.has_joined?(e)
-                = link_to 'Join', join_event_path(e), method: :post, class: 'join', data: {confirm: "Join this event for #{e.rate} tokens. You sure? "}
-              %p.title= e.title + (current_user.try(:has_joined?, e) ? " (You are Participating)" : " (#{e.rate} tokens)")
-              %p.details
-                - if e.same_day?
-                  = "#{date_str(e.start_time)} #{time_str(e.start_time)} - #{time_str(e.end_time)}"
-                - else
-                  = "#{date_str(e.start_time)} #{time_str(e.start_time)} - #{date_str(e.end_time)} #{time_str(e.end_time)}"
-                at
-                - if e.location_is_url?
-                  = link_to e.location, e.location
-                - else
-                  = e.location
-              %p.tags
-                - e.skill_list.each do |s|
-                  %span.tag= s
-              %p.description= e.description
+      - if @user.events.empty?
+        %p.instruction= "#{own ? "You haven't" : "This user hasn't"} hosted any event yet."
+      - else
+        - @user.events.each do |e|
+          .event
+            - if !@current_user.has_joined?(e)
+              = link_to 'Join', join_event_path(e), method: :post, class: 'join', data: {confirm: "Join this event for #{e.rate} tokens. You sure? "}
+            %p.title= e.title + (current_user.try(:has_joined?, e) ? " (You are Participating)" : " (#{e.rate} tokens)")
+            %p.details
+              - if e.same_day?
+                = "#{date_str(e.start_time)} #{time_str(e.start_time)} - #{time_str(e.end_time)}"
+              - else
+                = "#{date_str(e.start_time)} #{time_str(e.start_time)} - #{date_str(e.end_time)} #{time_str(e.end_time)}"
+              at
+              - if e.location_is_url?
+                = link_to e.location, e.location
+              - else
+                = e.location
+            %p.tags
+              - e.skill_list.each do |s|
+                %span.tag= s
+            %p.description= e.description
 
 
   .right

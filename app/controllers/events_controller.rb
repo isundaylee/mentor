@@ -29,7 +29,7 @@ class EventsController < ApplicationController
 
     current_user.join!(event)
 
-    return redirect_to event.user, flash: {success: "You have successfully joined the event. "} unless current_user.balance >= event.rate
+    return redirect_to event.user, flash: {success: "You have successfully joined the event. "}
   end
 
   private
