@@ -22,5 +22,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :events, only: [:new, :create]
+  resources :events, only: [:new, :create] do
+    member do
+      post 'join'
+    end
+  end
 end

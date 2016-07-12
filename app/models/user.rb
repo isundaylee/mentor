@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
 
   has_many :segments
   has_many :events
+  has_many :participations
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |u|
@@ -15,6 +16,14 @@ class User < ActiveRecord::Base
 
       u.save!
     end
+  end
+
+  def has_joined?(event)
+    self.participations.where(event: event).any?
+  end
+
+  def join!(event)
+    self.participations.create!(event: event)
   end
 
   def total_tutor_hours

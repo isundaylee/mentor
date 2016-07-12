@@ -1,5 +1,6 @@
 class Event < ActiveRecord::Base
   belongs_to :user
+  has_many :participations
 
   validates :title, presence: true, length: {minimum: 1, maximum: 200}
   validates :description, presence: true, length: {minimum: 10, maximum: 2000}
@@ -10,6 +11,8 @@ class Event < ActiveRecord::Base
   validates :date, presence: true
 
   before_validation :set_dates
+
+  acts_as_taggable_on :skills
 
   def date
     @date ||= start_time.try(:to_date)
@@ -51,6 +54,8 @@ class Event < ActiveRecord::Base
 
   private
     def set_dates
+      self.end_minute += 60 * 24 if self.end_minute <= self.start_minute
+
       self.start_time = date + start_minute.minutes
       self.end_time = date + end_minute.minutes
     end
