@@ -17,7 +17,7 @@
               %li= link_to 'Sign Out', sign_out_path, method: :post
             - else
               %li= link_to 'Sign In', "/auth/google_oauth2"
-            %li= link_to 'Explore', '#'
+            %li= link_to 'Explore', explore_path
             - if signed_in?
               %li= link_to 'Profile', user_path(current_user)
     .container

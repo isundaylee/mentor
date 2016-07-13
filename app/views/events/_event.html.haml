@@ -1,0 +1,18 @@
+.event
+  - if !current_user.try(:has_joined?, event)
+    = link_to 'Join', join_event_path(event), method: :post, class: 'join', data: {confirm: "Join this event for #{event.rate} tokens. You sure? "}
+  %p.title= event.title + (current_user.try(:has_joined?, event) ? " (You are Participating)" : " (#{event.rate} tokens)")
+  %p.details
+    - if event.same_day?
+      = "#{date_str(event.start_time)} #{time_str(event.start_time)} - #{time_str(event.end_time)}"
+    - else
+      = "#{date_str(event.start_time)} #{time_str(event.start_time)} - #{date_str(event.end_time)} #{time_str(event.end_time)}"
+    at
+    - if event.location_is_url?
+      = link_to event.location, event.location
+    - else
+      = event.location
+  %p.tags
+    - event.skill_list.each do |s|
+      %span.tag= s
+  %p.description= event.description

@@ -1,0 +1,40 @@
+.container
+  .by_tags
+    %h3 Browse by Skill
+    %p.tags
+      = link_to "All", explore_path, class: "tag"
+      - ActsAsTaggableOn::Tag.order('taggings_count DESC').each do |t|
+        = link_to explore_path(tag: t.to_s) do
+          %span.tag= t
+
+.container
+
+  .events
+    %h3 Events
+    - if @events.empty?
+      %p.missing No matching events found.
+    - else
+      - @events.each do |e|
+        = render e
+
+  .mentors
+    %h3 Mentors
+
+    - if @mentors.empty?
+      %p.missing No matching events found.
+    - else
+      - @mentors.each do |m|
+        = link_to m do
+          .mentor
+            .info
+              %h4= m.name
+
+              %p.desc= "Taught for #{m.total_tutor_hours} hours"
+              %p.desc= "Held #{m.events.count} events"
+              %p.desc= "Offers private tutoring for #{m.rate} tokens per hour"
+
+              %p.tags
+                - m.skill_list.each do |s|
+                  %span.tag= s
+
+            = image_tag m.avatar_url

@@ -1,1 +1,66 @@
 @import "common"
+
+#pages_explore
+  .tags
+    line-height: 2.3em
+    padding-right: 0.5em
+
+    a
+      text-decoration: none
+
+    .tag
+      background-color: $color-1
+      color: white
+      padding: 0.3em 0.6em
+      border-radius: 5px
+
+      &:hover
+        background-color: $color-1A
+
+  .by_tags
+    @include span-columns(12 of 12)
+
+  .missing
+    font-size: 1.2em
+
+  .mentors
+    @include span-columns(6 of 12)
+
+    .mentor
+      @include outer-container
+
+      margin-bottom: 2em
+
+      .info
+        @include span-columns(8 of 12)
+
+        h4, p
+          color: black
+
+        h4
+          font-weight: 600
+          font-size: 1.5em
+          margin-top: 0
+          margin-bottom: 0.2em
+
+        p.desc
+          margin-top: 0
+          margin-bottom: 0
+          font-size: 1.2em
+
+        .tags
+          margin-top: 0.5em
+          margin-bottom: 0
+
+      img
+        @include span-columns(4 of 12)
+
+        border-radius: 10%
+
+      &:hover
+        .info h4, .info p
+          color: $color-1A
+
+
+  .events
+    @include span-columns(6 of 12)

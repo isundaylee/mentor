@@ -1,12 +1,7 @@
 Rails.application.routes.draw do
-  get 'events/new'
+  root 'pages#explore'
 
-  get 'events/create'
-
-  get 'users/show'
-
-  root 'pages#homepage'
-
+  get 'explorer', to: 'pages#explore', as: :explore
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/')
   post 'sign_out', to: 'sessions#destroy', as: :sign_out
