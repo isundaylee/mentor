@@ -2,14 +2,14 @@
 %html
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %title Mentor
+    %title UMentor
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body{class: "#{controller_name}_action", id: "#{controller_name}_#{action_name}"}
     %header
       .container
-        %span.brand Mentor
+        %span.brand UMentor
         %nav
           %ul
             - if signed_in?
@@ -29,4 +29,4 @@
 
     %footer
       .container
-        %p Made with Love, Mentor 2016
+        %p Made with Love, UMentor 2016
