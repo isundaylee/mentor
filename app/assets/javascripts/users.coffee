@@ -12,6 +12,13 @@ ready = ->
         $(this).attr("href", $(this).attr("href").replace("PLACEHOLDER", encodeURIComponent(rate)))
       return !!rate
 
+    $('.edit-bio').click ->
+      bio  = prompt("What bio would you like to put here? ", $.trim($('.bio .content').text()))
+      if !!bio
+        $('#edit_bio_form [name=bio]').val(bio)
+        $('#edit_bio_form').submit()
+      false
+
     # Calendar thingy
 
     selection_start = null

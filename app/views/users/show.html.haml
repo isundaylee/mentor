@@ -47,6 +47,15 @@
               %span.score= "%0.1f" % @user.balance
               tokens left
 
+    .container
+      %p.bio
+        %span.content
+          = "#{@user.bio.presence || "This user has written nothing at all. "}"
+        - if own
+          = link_to 'Edit My Bio', '#', class: 'edit-bio'
+      = form_tag edit_bio_user_path(@user), id: 'edit_bio_form' do |f|
+        = hidden_field_tag :bio
+
     - if own
       .container
         %h3 Scheduled Private Tutoring

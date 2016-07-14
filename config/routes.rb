@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       post 'remove_skill'
       post 'add_skill'
       post 'set_rate'
+      post 'edit_bio'
 
       get 'calendar'
       post 'mark_calendar'

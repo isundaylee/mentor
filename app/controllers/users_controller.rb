@@ -42,6 +42,15 @@ class UsersController < ApplicationController
     redirect_to @user, flash: {success: "You have successfully set your rate to %0.1f tokens per hour. " % @user.rate}
   end
 
+  def edit_bio
+    return redirect_to root_path, flash: {error: "You can only edit your own bio. "} unless current_user == @user
+
+    @user.bio = params[:bio]
+    @user.save!
+
+    redirect_to @user, flash: {success: "You have successfully edited your bio. "}
+  end
+
   def mark_calendar
     return redirect_to root_path, flash: {error: "You need to be signed in. "} unless signed_in?
 
