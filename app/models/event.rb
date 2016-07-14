@@ -56,6 +56,7 @@ class Event < ActiveRecord::Base
 
   private
     def set_dates
+      return if date.nil?
       self.end_minute += 60 * 24 if self.end_minute <= self.start_minute
 
       self.start_time = date + start_minute.minutes
