@@ -4,11 +4,13 @@ class UsersController < ApplicationController
   def show
     @week_offset = params[:week_offset].to_i
 
-    givings = Segment.where(user_id: current_user.id).where('owner_id != ?', current_user.id)
-    receivings = Segment.where('user_id != ?', current_user.id).where(owner_id: current_user.id)
+    if signed_in?
+      givings = Segment.where(user_id: current_user.id).where('owner_id != ?', current_user.id)
+      receivings = Segment.where('user_id != ?', current_user.id).where(owner_id: current_user.id)
 
-    @tutorings = givings.map { |s| [:giving, s] } + receivings.map { |s| [:receiving, s] }
-    @tutorings = @tutorings.sort_by { |t| [t[1].date, t[1].st, t[1].ed] }
+      @tutorings = givings.map { |s| [:giving, s] } + receivings.map { |s| [:receiving, s] }
+      @tutorings = @tutorings.sort_by { |t| [t[1].date, t[1].st, t[1].ed] }
+    end
   end
 
   def remove_skill
